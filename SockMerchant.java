@@ -1,19 +1,15 @@
-import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.regex.*;
+package org.diamond;
 
-public class Solution {
+import java.util.Arrays;
 
-    // Complete the sockMerchant function below.
-    static int sockMerchant(int n, int[] ar) {
-       int sp = 0;
-		int s = 0;
+public class SocksMerchant {
+	
+	public static int socksPairCount(int n, int[] ar) {
+		int sp = 0; // initial number of socks pairs
+		int s = 0; // variable to sum the occurence of every color on the pile
 		//ctr + space is  eclipse short cut for System.out.println();
 		System.out.println("The total number of socks in the pile is: " + ar.length);
+		// sorting the array before everything
 		Arrays.sort(ar);
 		System.out.println("The sorted array is :");
 		for (int i : ar) {
@@ -24,45 +20,25 @@ public class Solution {
 			s += 1;
 			if (ar[i] != ar[i+1]) {
 				sp += s/2;
-				s = 0;
+				s = 0; // getting back the counter to zero
 			}
 			if( (i+1  == ar.length -1 ) && (ar[i] == ar[i+1])) {
 				s += 1 ;
 				sp += s/2;
-				break;
+				break; // terminating the loop after the last elment evaluation
 			}
 			
 		}
 		System.out.println("The number of socks pairs is: " +sp);
 		return sp;
+	}
 
-    }
+	public static void main(String[] args) {
+		int [] intAr = {10, 20, 20, 10, 10, 20, 30, 50, 10}; 
+		int num = intAr.length;
+		SocksMerchant.socksPairCount(num, intAr);
+		
 
-    private static final Scanner scanner = new Scanner(System.in);
+	}
 
-    public static void main(String[] args) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
-
-        int n = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-        int[] ar = new int[n];
-
-        String[] arItems = scanner.nextLine().split(" ");
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-        for (int i = 0; i < n; i++) {
-            int arItem = Integer.parseInt(arItems[i]);
-            ar[i] = arItem;
-        }
-
-        int result = sockMerchant(n, ar);
-
-        bufferedWriter.write(String.valueOf(result));
-        bufferedWriter.newLine();
-
-        bufferedWriter.close();
-
-        scanner.close();
-    }
 }
