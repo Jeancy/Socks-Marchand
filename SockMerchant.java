@@ -10,20 +10,31 @@ public class Solution {
 
     // Complete the sockMerchant function below.
     static int sockMerchant(int n, int[] ar) {
-        int sp = 0;
-        int p = 1;
-        List arl = Arrays.asList(ar);
-        for(int i = 0 ; i < arl.size() - 1; i++ ){
-            for(int j = i+1 ; j < arl.size(); j++) {
-                
-                if(arl.get(i) == arl.get(j) ){
-                    p += 1 ;
-                    arl.remove(j);
-                }
-            }
-            sp += p/2;
-        }
-        return sp;
+       int sp = 0;
+		int s = 0;
+		//ctr + space is  eclipse short cut for System.out.println();
+		System.out.println("The total number of socks in the pile is: " + ar.length);
+		Arrays.sort(ar);
+		System.out.println("The sorted array is :");
+		for (int i : ar) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
+		for (int i = 0; i < ar.length - 1 ; i++) {
+			s += 1;
+			if (ar[i] != ar[i+1]) {
+				sp += s/2;
+				s = 0;
+			}
+			if( (i+1  == ar.length -1 ) && (ar[i] == ar[i+1])) {
+				s += 1 ;
+				sp += s/2;
+				break;
+			}
+			
+		}
+		System.out.println("The number of socks pairs is: " +sp);
+		return sp;
 
     }
 
